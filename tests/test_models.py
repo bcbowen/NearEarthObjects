@@ -3,6 +3,12 @@ import math
 #import pathlib
 import unittest
 
+"""
+To run these tests from the project root, run:
+
+    $ python3 -m unittest --verbose tests.test_models
+
+"""
 
 class NearEarthObjectTests(unittest.TestCase):
     # The root of the project, containing `main.py`.
@@ -44,10 +50,18 @@ class NearEarthObjectTests(unittest.TestCase):
                 result.append("is not potentially hazardous.")
     """
     def test_to_string(self): 
-        cases = [(),]
+        cases = [
+            ('n1', True, 2.1, 'Hendricks', 'NEO n1 (Hendricks) has a diameter of 2.100 km and is potentially hazardous.'),
+            ('n1', True, 2.1, None, 'NEO n1 has a diameter of 2.100 km and is potentially hazardous.'), 
+            ('n1', True, float('nan'), None, 'NEO n1 is potentially hazardous.'),
+            ('n1', False, float('nan'), None, 'NEO n1 is not potentially hazardous.'),
 
-        for case in cases: 
-             pass
+        ]
+
+        for designation, is_hazardous, diameter, name, expected in cases: 
+            n = NearEarthObject(designation, is_hazardous, diameter=diameter, name=name)
+            result = str(n)
+            self.assertEqual(result, expected) 
             
 
 if __name__ == "__main__":

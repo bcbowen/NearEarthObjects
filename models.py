@@ -18,7 +18,8 @@ quirks of the data set, such as missing names and unknown diameters.
 You'll edit this file in Task 1.
 """
 from helpers import cd_to_datetime, datetime_to_str
-
+from datetime import datetime
+import math
 
 class NearEarthObject:
     """A near-Earth object (NEO).
@@ -54,7 +55,7 @@ class NearEarthObject:
     def __str__(self):
 
         result = [f"NEO {self.fullname} "]
-        if self.diameter != float('nan'): 
+        if not math.isnan(self.diameter): 
             result.append(f"has a diameter of {self.diameter:.3f} km and ")
 
         if self.hazardous: 
@@ -86,7 +87,7 @@ class CloseApproach:
     """
     # TODO: How can you, and should you, change the arguments to this constructor?
     # If you make changes, be sure to update the comments in this file.
-    def __init__(self, **info):
+    def __init__(self, utc_date: datetime, distance: float, velocity: float, neo: NearEarthObject | None):
         """Create a new `CloseApproach`.
 
         :param info: A dictionary of excess keyword arguments supplied to the constructor.
@@ -95,7 +96,7 @@ class CloseApproach:
         # onto attributes named `_designation`, `time`, `distance`, and `velocity`.
         # You should coerce these values to their appropriate data type and handle any edge cases.
         # The `cd_to_datetime` function will be useful.
-        self._designation = ''
+        #self._designation = ''
         self.time = None  # TODO: Use the cd_to_datetime function for this attribute.
         self.distance = 0.0
         self.velocity = 0.0
