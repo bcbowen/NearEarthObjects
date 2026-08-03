@@ -1,4 +1,5 @@
 from models import NearEarthObject, CloseApproach
+from datetime import datetime
 import math
 #import pathlib
 import unittest
@@ -63,6 +64,21 @@ class NearEarthObjectTests(unittest.TestCase):
             result = str(n)
             self.assertEqual(result, expected) 
             
+
+class CloseApproachTests(unittest.TestCase):
+     # On 1910-05-20 12:49, '1P (Halley)' approaches Earth at a distance of 0.15 au and a velocity of 70.56 km/s.
+     def test_to_string(self): 
+            d = 'n1'
+            n = "Skylab"
+            n = NearEarthObject(d, True, name=n)
+            time = '2026-Aug-02 14:34' #datetime(2026, 8, 2)
+            distance = 3.4
+            velocity = 4.5
+            c = CloseApproach(time, distance, velocity, n)
+
+            expected = "At 2026-08-02 14:34, 'n1 (Skylab)' approaches Earth at a distance of 3.40 au and a velocity of 4.50 km/s."
+            result = str(c)
+            self.assertEqual(expected, result)
 
 if __name__ == "__main__":
     unittest.main() 
