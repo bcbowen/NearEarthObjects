@@ -32,7 +32,7 @@ class TestLoadNEOs(unittest.TestCase):
         cls.neos_by_designation = {neo.designation: neo for neo in cls.neos}
 
     @classmethod
-    def get_first_neo_or_none(cls):
+    def get_first_neo_or_none(cls) -> NearEarthObject | None:
         try:
             # Don't use __getitem__ in case the object is a set or a stream.
             return next(iter(cls.neos))
@@ -88,7 +88,7 @@ class TestLoadApproaches(unittest.TestCase):
 
 
     @classmethod
-    def get_first_approach_or_none(cls):
+    def get_first_approach_or_none(cls) -> CloseApproach | None:
         try:
             # Don't __getitem__, in case it's a set or a stream.
             return next(iter(cls.approaches))
