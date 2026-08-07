@@ -104,9 +104,19 @@ def load_approaches(cad_json_path: pathlib.Path) -> List[CloseApproach]:
   ],
     """
     cas = []
+    designation_index = 0
+    date_index = 3
+    distance_index = 4
+    velocity_index = 7
+
 
     with open(cad_json_path, 'r') as file:
         contents = json.load(file)
-        for  
-    # TODO: Load close approach data from the given JSON file.
+        for row in contents["data"]:
+            try: 
+                n = NearEarthObject(row[designation_index], True) 
+                ca = CloseApproach(row[date_index], float(row[distance_index]), float(row[velocity_index]), n)
+                cas.append(ca)
+            except: 
+                print(row)
     return cas
