@@ -111,18 +111,21 @@ class TestLoadApproaches(unittest.TestCase):
     def test_approach_time_is_datetime(self):
         approach = self.get_first_approach_or_none()
         self.assertIsNotNone(approach)
+        assert(approach != None)
         self.assertIsInstance(approach.time, datetime.datetime)
 
 
     def test_approach_distance_is_float(self):
         approach = self.get_first_approach_or_none()
         self.assertIsNotNone(approach)
+        assert(approach != None)
         self.assertIsInstance(approach.distance, float)
 
 
     def test_approach_velocity_is_float(self):
         approach = self.get_first_approach_or_none()
         self.assertIsNotNone(approach)
+        assert(approach != None)
         self.assertIsInstance(approach.velocity, float)
 
 

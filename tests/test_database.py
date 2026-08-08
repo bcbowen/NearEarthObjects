@@ -41,9 +41,12 @@ class TestDatabase(unittest.TestCase):
             self.assertTrue(hasattr(neo, 'approaches'))
 
     def test_database_construction_ensures_neos_collectively_exhaust_approaches(self):
+        #self.skipTest("troubleshooting")
+        #self.
         approaches = set()
         for neo in self.neos:
             approaches.update(neo.approaches)
+        print(f"generated approach count: {len(approaches)}; neo approach count: {len(self.approaches)}")
         self.assertEqual(approaches, set(self.approaches))
 
     def test_database_construction_ensures_neos_mutually_exclude_approaches(self):
@@ -57,6 +60,7 @@ class TestDatabase(unittest.TestCase):
     def test_get_neo_by_designation(self):
         cerberus = self.db.get_neo_by_designation('1865')
         self.assertIsNotNone(cerberus)
+        assert(cerberus != None)
         self.assertEqual(cerberus.designation, '1865')
         self.assertEqual(cerberus.name, 'Cerberus')
         self.assertEqual(cerberus.diameter, 1.2)
@@ -64,6 +68,7 @@ class TestDatabase(unittest.TestCase):
 
         adonis = self.db.get_neo_by_designation('2101')
         self.assertIsNotNone(adonis)
+        assert(adonis != None)
         self.assertEqual(adonis.designation, '2101')
         self.assertEqual(adonis.name, 'Adonis')
         self.assertEqual(adonis.diameter, 0.60)
@@ -71,6 +76,7 @@ class TestDatabase(unittest.TestCase):
 
         tantalus = self.db.get_neo_by_designation('2102')
         self.assertIsNotNone(tantalus)
+        assert(tantalus != None)
         self.assertEqual(tantalus.designation, '2102')
         self.assertEqual(tantalus.name, 'Tantalus')
         self.assertEqual(tantalus.diameter, 1.649)
@@ -79,6 +85,7 @@ class TestDatabase(unittest.TestCase):
     def test_get_neo_by_designation_neos_with_year(self):
         bs_2020 = self.db.get_neo_by_designation('2020 BS')
         self.assertIsNotNone(bs_2020)
+        assert(bs_2020 != None)
         self.assertEqual(bs_2020.designation, '2020 BS')
         self.assertEqual(bs_2020.name, None)
         self.assertTrue(math.isnan(bs_2020.diameter))
@@ -86,6 +93,7 @@ class TestDatabase(unittest.TestCase):
 
         py1_2020 = self.db.get_neo_by_designation('2020 PY1')
         self.assertIsNotNone(py1_2020)
+        assert(py1_2020 != None)
         self.assertEqual(py1_2020.designation, '2020 PY1')
         self.assertEqual(py1_2020.name, None)
         self.assertTrue(math.isnan(py1_2020.diameter))
@@ -98,6 +106,7 @@ class TestDatabase(unittest.TestCase):
     def test_get_neo_by_name(self):
         lemmon = self.db.get_neo_by_name('Lemmon')
         self.assertIsNotNone(lemmon)
+        assert(lemmon != None)
         self.assertEqual(lemmon.designation, '2013 TL117')
         self.assertEqual(lemmon.name, 'Lemmon')
         self.assertTrue(math.isnan(lemmon.diameter))
@@ -105,6 +114,7 @@ class TestDatabase(unittest.TestCase):
 
         jormungandr = self.db.get_neo_by_name('Jormungandr')
         self.assertIsNotNone(jormungandr)
+        assert(jormungandr != None)
         self.assertEqual(jormungandr.designation, '471926')
         self.assertEqual(jormungandr.name, 'Jormungandr')
         self.assertTrue(math.isnan(jormungandr.diameter))

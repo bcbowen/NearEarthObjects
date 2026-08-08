@@ -54,11 +54,15 @@ class NEODatabase:
             self._neo_designation_lookup[neo.designation] = neo
 
         self._approaches = approaches
+
+
+
         # when approaches are first loaded they only have the designation. Populate the neo object from the collection using the lookup
         for a in self._approaches: 
             n = self._neo_designation_lookup[a.neo.designation]
             if n: 
                 a.neo = n
+                n.approaches.append(a)
 
     def get_neo_by_designation(self, designation: str) -> NearEarthObject | None:
         """Find and return an NEO by its primary designation.
