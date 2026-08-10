@@ -41,8 +41,6 @@ class TestDatabase(unittest.TestCase):
             self.assertTrue(hasattr(neo, 'approaches'))
 
     def test_database_construction_ensures_neos_collectively_exhaust_approaches(self):
-        #self.skipTest("troubleshooting")
-        #self.
         approaches = set()
         for neo in self.neos:
             approaches.update(neo.approaches)

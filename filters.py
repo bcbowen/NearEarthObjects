@@ -17,10 +17,13 @@ iterator.
 You'll edit this file in Tasks 3a and 3c.
 """
 import operator
-
+import datetime
+from models import CloseApproach, NearEarthObject
 
 class UnsupportedCriterionError(NotImplementedError):
     """A filter criterion is unsupported."""
+
+
 
 
 class AttributeFilter:
@@ -52,12 +55,12 @@ class AttributeFilter:
         self.op = op
         self.value = value
 
-    def __call__(self, approach):
+    def __call__(self, approach: CloseApproach):
         """Invoke `self(approach)`."""
         return self.op(self.get(approach), self.value)
 
     @classmethod
-    def get(cls, approach):
+    def get(cls, approach: CloseApproach):
         """Get an attribute of interest from a close approach.
 
         Concrete subclasses must override this method to get an attribute of
@@ -71,6 +74,24 @@ class AttributeFilter:
     def __repr__(self):
         return f"{self.__class__.__name__}(op=operator.{self.op.__name__}, value={self.value})"
 
+class DesignationFilter(AttributeFilter):
+    @classmethod
+    def get(cls, approach: CloseApproach):
+        return approach.neo.designation
+
+class NameFilter(AttributeFilter): 
+    @classmethod
+    def get(cls, approach:CloseApproach): 
+        return approach.neo.name
+"""
+class DateFilter(AttributeFilter): 
+    def __init__(self, op, value: datetime.datetime, field: str): 
+        super.__init__(op, value, field)
+
+    @classmethod
+    def get(cls, approach): 
+
+"""
 
 def create_filters(date=None, start_date=None, end_date=None,
                    distance_min=None, distance_max=None,
