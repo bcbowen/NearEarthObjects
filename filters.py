@@ -83,6 +83,20 @@ class NameFilter(AttributeFilter):
     @classmethod
     def get(cls, approach:CloseApproach): 
         return approach.neo.name
+
+class DiameterFilter(AttributeFilter): 
+    @classmethod
+    def get(cls, approach:CloseApproach): 
+        return approach.neo.diameter
+
+# TODO: neo haz
+
+# TODO: ca time filter
+
+# TODO: ca dist filter
+
+# TODO: ca vel filter
+    
 """
 class DateFilter(AttributeFilter): 
     def __init__(self, op, value: datetime.datetime, field: str): 
