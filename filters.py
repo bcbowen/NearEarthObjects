@@ -19,6 +19,7 @@ You'll edit this file in Tasks 3a and 3c.
 import operator
 import datetime
 from models import CloseApproach, NearEarthObject
+from typing import List
 
 class UnsupportedCriterionError(NotImplementedError):
     """A filter criterion is unsupported."""
@@ -89,29 +90,37 @@ class DiameterFilter(AttributeFilter):
     def get(cls, approach:CloseApproach): 
         return approach.neo.diameter
 
-# TODO: neo haz
-
-# TODO: ca time filter
-
-# TODO: ca dist filter
-
-# TODO: ca vel filter
-    
-"""
-class DateFilter(AttributeFilter): 
-    def __init__(self, op, value: datetime.datetime, field: str): 
-        super.__init__(op, value, field)
-
+class HazardousFilter(AttributeFilter): 
     @classmethod
-    def get(cls, approach): 
+    def get(cls, approach:CloseApproach): 
+        return approach.neo.hazardous
 
-"""
+class TimeFilter(AttributeFilter): 
+    @classmethod
+    def get(cls, approach:CloseApproach): 
+        return approach.time
 
-def create_filters(date=None, start_date=None, end_date=None,
-                   distance_min=None, distance_max=None,
-                   velocity_min=None, velocity_max=None,
-                   diameter_min=None, diameter_max=None,
-                   hazardous=None):
+class DistanceFilter(AttributeFilter): 
+    @classmethod
+    def get(cls, approach:CloseApproach): 
+        return approach.distance
+
+class VelocityFilter(AttributeFilter): 
+    @classmethod
+    def get(cls, approach:CloseApproach): 
+        return approach.velocity
+    
+
+def create_filters(date: datetime.datetime | None = None, 
+                   start_date: datetime.datetime | None = None, 
+                   end_date: datetime.datetime | None = None,
+                   distance_min: float | None = None, 
+                   distance_max: float | None = None,
+                   velocity_min: float | None = None, 
+                   velocity_max: float | None = None,
+                   diameter_min: float | None = None, 
+                   diameter_max: float | None = None,
+                   hazardous: bool | None = None) -> List[AttributeFilter]:
     """Create a collection of filters from user-specified criteria.
 
     Each of these arguments is provided by the main module with a value from the
@@ -141,8 +150,38 @@ def create_filters(date=None, start_date=None, end_date=None,
     :param hazardous: Whether the NEO of a matching `CloseApproach` is potentially hazardous.
     :return: A collection of filters for use with `query`.
     """
-    # TODO: Decide how you will represent your filters.
-    return ()
+    filters = []
+    if date != None: 
+        filters.append(TimeFilter(operator.eq, date))
+
+    if start_date != None: 
+        filters.append(TimeFilter(operator.ge, start_date))
+
+    if end_date != None: 
+        filters.append(TimeFilter(operator.le, end_date))
+
+    if distance_min != None: 
+        filters.append(DistanceFilter(operator.ge, distance_min))
+
+    if distance_max != None: 
+        filters.append(DistanceFilter(operator.le, distance_max))
+
+    if velocity_min != None: 
+        filters.append(VelocityFilter(operator.ge, velocity_min))
+
+    if velocity_max != None: 
+        filters.append(VelocityFilter(operator.le, velocity_max))
+
+    if diameter_min != None: 
+        filters.append(DiameterFilter(operator.ge, diameter_min))
+
+    if diameter_max != None: 
+        filters.append(DiameterFilter(operator.ge, diameter_max))
+
+    if hazardous != None: 
+        filters.append(HazardousFilter(operator.eq, hazardous))
+
+    return filters
 
 
 def limit(iterator, n=None):
