@@ -11,7 +11,7 @@ data on NEOs and close approaches extracted by `extract.load_neos` and
 
 You'll edit this file in Tasks 2 and 3.
 """
-
+from filters import AttributeFilter
 from models import NearEarthObject, CloseApproach
 from typing import List
 
@@ -100,7 +100,7 @@ class NEODatabase:
             return self._neo_name_lookup[name][0]
         return None
 
-    def query(self, filters=()):
+    def query(self, filters: List[AttributeFilter] = []):
         """Query close approaches to generate those that match a collection of filters.
 
         This generates a stream of `CloseApproach` objects that match all of the
@@ -116,4 +116,13 @@ class NEODatabase:
         """
         # TODO: Generate `CloseApproach` objects that match all of the filters.
         for approach in self._approaches:
+            if len(filters) > 0:
+                filtered = False 
+                for filter in filters: 
+                    if not filter(approach): 
+                        filtered = True
+                        break
+                if filtered: 
+                    continue
+                    
             yield approach
