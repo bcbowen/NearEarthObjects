@@ -17,7 +17,7 @@ iterator.
 You'll edit this file in Tasks 3a and 3c.
 """
 import operator
-import datetime
+from datetime import date
 from models import CloseApproach, NearEarthObject
 from typing import List
 
@@ -111,9 +111,9 @@ class VelocityFilter(AttributeFilter):
         return approach.velocity
     
 
-def create_filters(date: datetime.datetime | None = None, 
-                   start_date: datetime.datetime | None = None, 
-                   end_date: datetime.datetime | None = None,
+def create_filters(date: date | None = None, 
+                   start_date: date | None = None, 
+                   end_date: date | None = None,
                    distance_min: float | None = None, 
                    distance_max: float | None = None,
                    velocity_min: float | None = None, 

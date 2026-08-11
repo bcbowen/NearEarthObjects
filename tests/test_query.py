@@ -49,7 +49,7 @@ class TestQuery(unittest.TestCase):
     ###############################################
 
     def test_query_approaches_on_march_2(self):
-        self.skipTest("Debugging")
+        #self.skipTest("Debugging")
         date = datetime.date(2020, 3, 2)
 
         expected = set(
