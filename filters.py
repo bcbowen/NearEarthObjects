@@ -176,7 +176,7 @@ def create_filters(date: date | None = None,
         filters.append(DiameterFilter(operator.ge, diameter_min))
 
     if diameter_max != None: 
-        filters.append(DiameterFilter(operator.ge, diameter_max))
+        filters.append(DiameterFilter(operator.le, diameter_max))
 
     if hazardous != None: 
         filters.append(HazardousFilter(operator.eq, hazardous))

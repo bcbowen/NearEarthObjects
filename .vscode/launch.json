@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug single unittest",
+      "type": "python",
+      "request": "launch",
+      "module": "unittest",
+      "args": [
+        "tests.test_query.TestQuery.test_query_approaches_on_march_2"
+      ],
+      "justMyCode": false,
+      "console": "integratedTerminal"
+    }
+  ]
+}
