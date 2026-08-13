@@ -98,7 +98,8 @@ class HazardousFilter(AttributeFilter):
 class TimeFilter(AttributeFilter): 
     @classmethod
     def get(cls, approach:CloseApproach): 
-        return approach.time
+        # Return the date portion for comparisons against `date` objects.
+        return approach.time.date()
 
 class DistanceFilter(AttributeFilter): 
     @classmethod

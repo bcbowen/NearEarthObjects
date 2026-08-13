@@ -49,7 +49,6 @@ class TestQuery(unittest.TestCase):
     ###############################################
 
     def test_query_approaches_on_march_2(self):
-        self.skipTest("Debugging")
         date = datetime.date(2020, 3, 2)
 
         expected = set(
@@ -63,7 +62,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_approaches_after_april(self):
-        self.skipTest("Debugging")
         start_date = datetime.date(2020, 4, 1)
 
         expected = set(
@@ -77,8 +75,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_approaches_before_july(self):
-        self.skipTest("Debugging")
-        
         end_date = datetime.date(2020, 6, 30)
 
         expected = set(
@@ -92,8 +88,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_approaches_in_march(self):
-        self.skipTest("Debugging")
-
         start_date = datetime.date(2020, 3, 1)
         end_date = datetime.date(2020, 3, 31)
 
@@ -108,8 +102,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_with_conflicting_date_bounds(self):
-        self.skipTest("Debugging")
-
         start_date = datetime.date(2020, 10, 1)
         end_date = datetime.date(2020, 4, 1)
 
@@ -120,8 +112,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_with_bounds_and_a_specific_date(self):
-        self.skipTest("Debugging")
-
         start_date = datetime.date(2020, 2, 1)
         date = datetime.date(2020, 3, 2)
         end_date = datetime.date(2020, 4, 1)
@@ -137,8 +127,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_with_max_distance(self):
-        #self.skipTest("Debugging")
-
         distance_max = 0.4
 
         expected = set(
@@ -153,8 +141,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_with_min_distance(self):
-        #self.skipTest("Debugging")
-
         distance_min = 0.1
 
         expected = set(
@@ -169,8 +155,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_with_max_distance_and_min_distance(self):
-        #self.skipTest("Debugging")
-
         distance_max = 0.4
         distance_min = 0.1
 
@@ -186,8 +170,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_with_max_distance_and_min_distance_conflicting(self):
-        #self.skipTest("Debugging")
-
         distance_max = 0.1
         distance_min = 0.4
 
@@ -199,8 +181,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_with_max_velocity(self):
-        #self.skipTest("Debugging")
-
         velocity_max = 20
 
         expected = set(
@@ -215,8 +195,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_with_min_velocity(self):
-        #self.skipTest("Debugging")
-
         velocity_min = 10
 
         expected = set(
@@ -231,8 +209,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_with_max_velocity_and_min_velocity(self):
-        #self.skipTest("Debugging")
-
         velocity_max = 20
         velocity_min = 10
 
@@ -248,8 +224,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_with_max_velocity_and_min_velocity_conflicting(self):
-        #self.skipTest("Debugging")
-
         velocity_max = 10
         velocity_min = 20
 
@@ -261,8 +235,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_with_max_diameter(self):
-        #self.skipTest("Debugging")
-
         diameter_max = 1.5
 
         expected = set(
@@ -277,8 +249,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_with_min_diameter(self):
-        #self.skipTest("Debugging")
-
         diameter_min = 0.5
 
         expected = set(
@@ -293,8 +263,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_with_max_diameter_and_min_diameter(self):
-        #self.skipTest("Debugging")
-
         diameter_max = 1.5
         diameter_min = 0.5
 
@@ -310,8 +278,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_with_max_diameter_and_min_diameter_conflicting(self):
-        #self.skipTest("Debugging")
-
         diameter_max = 0.5
         diameter_min = 1.5
 
@@ -323,8 +289,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_with_hazardous(self):
-        #self.skipTest("Debugging")
-
         expected = set(
             approach for approach in self.approaches
             if approach.neo.hazardous
@@ -337,8 +301,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_with_not_hazardous(self):
-        #self.skipTest("Debugging")
-
         expected = set(
             approach for approach in self.approaches
             if not approach.neo.hazardous
@@ -355,8 +317,6 @@ class TestQuery(unittest.TestCase):
     ###########################
 
     def test_query_approaches_on_march_2_with_max_distance(self):
-        self.skipTest("Debugging")
-
         date = datetime.date(2020, 3, 2)
         distance_max = 0.4
 
@@ -372,8 +332,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_approaches_on_march_2_with_min_distance(self):
-        self.skipTest("Debugging")
-
         date = datetime.date(2020, 3, 2)
         distance_min = 0.1
 
@@ -389,8 +347,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_approaches_in_march_with_min_distance_and_max_distance(self):
-        self.skipTest("Debugging")
-
         start_date = datetime.date(2020, 3, 1)
         end_date = datetime.date(2020, 3, 31)
         distance_max = 0.4
@@ -411,8 +367,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_approaches_in_march_with_distance_bounds_and_max_velocity(self):
-        self.skipTest("Debugging")
-
         start_date = datetime.date(2020, 3, 1)
         end_date = datetime.date(2020, 3, 31)
         distance_max = 0.4
@@ -436,7 +390,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_approaches_in_march_with_distance_and_velocity_bounds(self):
-        self.skipTest("Debugging")
 
         start_date = datetime.date(2020, 3, 1)
         end_date = datetime.date(2020, 3, 31)
@@ -462,7 +415,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_approaches_in_spring_with_distance_and_velocity_bounds_and_max_diameter(self):
-        self.skipTest("Debugging")
 
         start_date = datetime.date(2020, 3, 1)
         end_date = datetime.date(2020, 5, 31)
@@ -491,7 +443,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_approaches_in_spring_with_distance_velocity_and_diameter_bounds(self):
-        self.skipTest("Debugging")
 
         start_date = datetime.date(2020, 3, 1)
         end_date = datetime.date(2020, 5, 31)
@@ -521,7 +472,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_approaches_in_spring_with_all_bounds_and_potentially_hazardous_neos(self):
-        self.skipTest("Debugging")
 
         start_date = datetime.date(2020, 3, 1)
         end_date = datetime.date(2020, 5, 31)
@@ -553,8 +503,6 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(expected, received, msg="Computed results do not match expected results.")
 
     def test_query_approaches_in_spring_with_all_bounds_and_not_potentially_hazardous_neos(self):
-        self.skipTest("Debugging")
-
         start_date = datetime.date(2020, 3, 1)
         end_date = datetime.date(2020, 5, 31)
         distance_max = 0.5
