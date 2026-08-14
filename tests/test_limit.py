@@ -37,6 +37,7 @@ class TestLimit(unittest.TestCase):
         self.assertEqual(tuple(limit(iter(self.iterable), 10)), (0, 1, 2, 3, 4))
 
     def test_limit_iterator_without_limit(self):
+        
         self.assertEqual(tuple(limit(iter(self.iterable))), (0, 1, 2, 3, 4))
         self.assertEqual(tuple(limit(iter(self.iterable), 0)), (0, 1, 2, 3, 4))
         self.assertEqual(tuple(limit(iter(self.iterable), None)), (0, 1, 2, 3, 4))
