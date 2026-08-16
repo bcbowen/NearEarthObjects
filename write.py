@@ -11,10 +11,14 @@ extension determines which of these functions is used.
 You'll edit this file in Part 4.
 """
 import csv
+import helpers
 import json
+import math
+import pathlib
+from typing import Iterable
+from models import CloseApproach
 
-
-def write_to_csv(results, filename):
+def write_to_csv(results: Iterable[CloseApproach], filename: pathlib.Path):
     """Write an iterable of `CloseApproach` objects to a CSV file.
 
     The precise output specification is in `README.md`. Roughly, each output row
@@ -25,10 +29,27 @@ def write_to_csv(results, filename):
     :param filename: A Path-like object pointing to where the data should be saved.
     """
     fieldnames = ('datetime_utc', 'distance_au', 'velocity_km_s', 'designation', 'name', 'diameter_km', 'potentially_hazardous')
-    # TODO: Write the results to a CSV file, following the specification in the instructions.
+    if not filename.parent.exists(): 
+        raise FileNotFoundError(f"Invalid path: {filename}")
+
+    with open(filename, 'w') as file: 
+        writer = csv.DictWriter(file, fieldnames = fieldnames)
+        writer.writeheader()
+        row = {}
+        for result in results: 
+            
+            row['datetime_utc'] = helpers.datetime_to_cd(result.time)
+            row['distance_au'] = result.distance
+            row['velocity_km_s'] = result.velocity
+            row['designation'] = result.neo.designation
+            row['name'] = result.neo.name if result.neo.name else ''
+            row['diameter_km'] = result.neo.diameter if not math.isnan(result.neo.diameter) else 'nan'
+            row['potentially_hazardous'] = result.neo.hazardous
+            writer.writerow(row)
 
 
-def write_to_json(results, filename):
+
+def write_to_json(results: Iterable[CloseApproach], filename: pathlib.Path):
     """Write an iterable of `CloseApproach` objects to a JSON file.
 
     The precise output specification is in `README.md`. Roughly, the output is a
@@ -40,3 +61,14 @@ def write_to_json(results, filename):
     :param filename: A Path-like object pointing to where the data should be saved.
     """
     # TODO: Write the results to a JSON file, following the specification in the instructions.
+
+    """
+    with open('available-listings.json', 'w') as outfile:
+    json.dump(available, outfile, indent=2)
+    """
+
+    if not filename.parent.exists(): 
+        raise FileNotFoundError(f"Invalid path: {filename}")
+
+    with open(filename, 'w') as file: 
+        json.dump(results, file, indent = 2)
