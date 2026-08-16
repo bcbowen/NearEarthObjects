@@ -29,6 +29,8 @@ def write_to_csv(results: Iterable[CloseApproach], filename: pathlib.Path):
     :param filename: A Path-like object pointing to where the data should be saved.
     """
     fieldnames = ('datetime_utc', 'distance_au', 'velocity_km_s', 'designation', 'name', 'diameter_km', 'potentially_hazardous')
+    if not filename: 
+        return
     if not filename.parent.exists(): 
         raise FileNotFoundError(f"Invalid path: {filename}")
 
@@ -60,13 +62,15 @@ def write_to_json(results: Iterable[CloseApproach], filename: pathlib.Path):
     :param results: An iterable of `CloseApproach` objects.
     :param filename: A Path-like object pointing to where the data should be saved.
     """
-    # TODO: Write the results to a JSON file, following the specification in the instructions.
+    
 
     """
     with open('available-listings.json', 'w') as outfile:
     json.dump(available, outfile, indent=2)
     """
 
+    if not filename: 
+        return
     if not filename.parent.exists(): 
         raise FileNotFoundError(f"Invalid path: {filename}")
 
