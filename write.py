@@ -29,10 +29,10 @@ def write_to_csv(results: Iterable[CloseApproach], filename: pathlib.Path):
     :param filename: A Path-like object pointing to where the data should be saved.
     """
     fieldnames = ('datetime_utc', 'distance_au', 'velocity_km_s', 'designation', 'name', 'diameter_km', 'potentially_hazardous')
-    if not filename: 
-        return
-    if not filename.parent.exists(): 
-        raise FileNotFoundError(f"Invalid path: {filename}")
+    #if not filename: 
+    #    return
+    #if not filename.parent.exists(): 
+    #    raise FileNotFoundError(f"Invalid path: {filename}")
 
     with open(filename, 'w') as file: 
         writer = csv.DictWriter(file, fieldnames = fieldnames)
@@ -40,7 +40,7 @@ def write_to_csv(results: Iterable[CloseApproach], filename: pathlib.Path):
         row = {}
         for result in results: 
             
-            row['datetime_utc'] = helpers.datetime_to_cd(result.time)
+            row['datetime_utc'] = helpers.datetime_to_str(result.time)
             row['distance_au'] = result.distance
             row['velocity_km_s'] = result.velocity
             row['designation'] = result.neo.designation
@@ -59,6 +59,18 @@ def write_to_json(results: Iterable[CloseApproach], filename: pathlib.Path):
     their values and the 'neo' key mapping to a dictionary of the associated
     NEO's attributes.
 
+    {
+    "datetime_utc": "2025-11-30 02:18",
+    "distance_au": 0.397647483265833,
+    "velocity_km_s": 3.72885069167641,
+    "neo": {
+      "designation": "433",
+      "name": "Eros",
+      "diameter_km": 16.84,
+      "potentially_hazardous": false
+    }
+  },
+
     :param results: An iterable of `CloseApproach` objects.
     :param filename: A Path-like object pointing to where the data should be saved.
     """
@@ -69,10 +81,25 @@ def write_to_json(results: Iterable[CloseApproach], filename: pathlib.Path):
     json.dump(available, outfile, indent=2)
     """
 
-    if not filename: 
-        return
-    if not filename.parent.exists(): 
-        raise FileNotFoundError(f"Invalid path: {filename}")
+    #if not filename: 
+    #    return
+    #if not filename.parent.exists(): 
+    #    raise FileNotFoundError(f"Invalid path: {filename}")
 
     with open(filename, 'w') as file: 
-        json.dump(results, file, indent = 2)
+        approaches = []
+        for result in results: 
+            approach = {} 
+            neo = {}
+            approach['datetime_utc'] = helpers.datetime_to_str(result.time)
+            approach['distance_au'] = result.distance
+            approach['velocity_km_s'] = result.velocity
+
+            neo['designation'] = result.neo.designation
+            neo['name'] = result.neo.name if result.neo.name else ''
+            neo['diameter_km'] = result.neo.diameter if not math.isnan(result.neo.diameter) else 'NaN'
+            neo['potentially_hazardous'] = result.neo.hazardous
+            approach["neo"] = neo
+            approaches.append(approach)
+
+        json.dump(approaches, file, indent = 2)
