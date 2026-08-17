@@ -99,7 +99,7 @@ class TimeFilter(AttributeFilter):
     @classmethod
     def get(cls, approach:CloseApproach): 
         # Return the date portion for comparisons against `date` objects.
-        return approach.time.date()
+        return approach.time
 
 class DistanceFilter(AttributeFilter): 
     @classmethod
