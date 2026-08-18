@@ -129,13 +129,13 @@ class FilterTests(unittest.TestCase):
         # cases: op, criteria time: all expected to match
         expected = True
         cases = [
-            (operator.eq, a.time),
-            (operator.ge, a.time), 
-            (operator.ge, a.time + timedelta(hours=-1)),
-            (operator.le, a.time),  
-            (operator.le, a.time + timedelta(hours=1)),
-            (operator.lt, a.time + timedelta(hours=1)), 
-            (operator.gt, a.time + timedelta(hours=-1)),
+            (operator.eq, a.time.date()),
+            (operator.ge, a.time.date()), 
+            (operator.ge, (a.time + timedelta(hours=-1)).date()),
+            (operator.le, a.time.date()),  
+            (operator.le, (a.time + timedelta(hours=1)).date()),
+            (operator.lt, (a.time + timedelta(hours=1)).date()), 
+            (operator.gt, (a.time + timedelta(hours=-1)).date()),
         ]
         for op, criteria in cases: 
             f = TimeFilter(op, criteria)
