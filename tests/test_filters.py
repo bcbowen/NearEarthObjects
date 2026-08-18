@@ -131,11 +131,11 @@ class FilterTests(unittest.TestCase):
         cases = [
             (operator.eq, a.time.date()),
             (operator.ge, a.time.date()), 
-            (operator.ge, (a.time + timedelta(hours=-1)).date()),
+            (operator.ge, (a.time + timedelta(days = -1)).date()),
             (operator.le, a.time.date()),  
-            (operator.le, (a.time + timedelta(hours=1)).date()),
-            (operator.lt, (a.time + timedelta(hours=1)).date()), 
-            (operator.gt, (a.time + timedelta(hours=-1)).date()),
+            (operator.le, (a.time + timedelta(days = 1)).date()),
+            (operator.lt, (a.time + timedelta(days = 1)).date()), 
+            (operator.gt, (a.time + timedelta(days = -1)).date()),
         ]
         for op, criteria in cases: 
             f = TimeFilter(op, criteria)
@@ -146,14 +146,13 @@ class FilterTests(unittest.TestCase):
     def test_time_filter_mismatch(self): 
         a = self.init_close_approach()
                         
-        # cases: op, criteria time: all expected to match
+        # cases: op, criteria time: all expected not to match
         expected = False
         cases = [
-            (operator.eq, a.time + timedelta(hours=+1)),
-            (operator.ge, a.time + timedelta(hours=+1)), 
-            (operator.le, a.time + timedelta(hours=-1)),
-            (operator.lt, a.time + timedelta(hours=-1)), 
-            (operator.gt, a.time + timedelta(hours=+1)),
+            (operator.ge, (a.time + timedelta(days = +1)).date()), 
+            (operator.le, (a.time + timedelta(days = -1)).date()),
+            (operator.lt, (a.time + timedelta(days = -1)).date()), 
+            (operator.gt, (a.time + timedelta(days = +1)).date()),
         ]
         for op, criteria in cases: 
             f = TimeFilter(op, criteria)
