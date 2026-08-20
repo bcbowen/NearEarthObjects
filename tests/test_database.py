@@ -44,7 +44,7 @@ class TestDatabase(unittest.TestCase):
         approaches = set()
         for neo in self.neos:
             approaches.update(neo.approaches)
-        print(f"generated approach count: {len(approaches)}; neo approach count: {len(self.approaches)}")
+        #print(f"generated approach count: {len(approaches)}; neo approach count: {len(self.approaches)}")
         self.assertEqual(approaches, set(self.approaches))
 
     def test_database_construction_ensures_neos_mutually_exclude_approaches(self):
