@@ -97,7 +97,7 @@ def write_to_json(results: Iterable[CloseApproach], filename: pathlib.Path):
 
             neo['designation'] = result.neo.designation
             neo['name'] = result.neo.name if result.neo.name else ''
-            neo['diameter_km'] = result.neo.diameter if not math.isnan(result.neo.diameter) else 'NaN'
+            neo['diameter_km'] = result.neo.diameter if not math.isnan(result.neo.diameter) else float('nan')
             neo['potentially_hazardous'] = result.neo.hazardous
             approach["neo"] = neo
             approaches.append(approach)

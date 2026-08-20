@@ -20,6 +20,7 @@ import csv
 import datetime
 import io
 import json
+import math
 import pathlib
 import unittest
 import unittest.mock
@@ -44,6 +45,29 @@ def build_results(n):
 
     # Only needed to link together these objects.
     NEODatabase(neos, approaches)
+    
+    """
+    g = 0
+    b = 0
+    for a in approaches: 
+        if not math.isnan(a.neo.diameter): 
+            g += 1
+        else: 
+            b += 1
+
+    print(f"good: {g}; bad: {b}")  
+
+    g = 0
+    b = 0
+    for nn in neos: 
+        if not math.isnan(nn.diameter): 
+            g += 1
+        else: 
+            b += 1
+    
+    print(f"good: {g}; bad: {b}")  
+    
+    """
 
     return approaches[:n]
 
