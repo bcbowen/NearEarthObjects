@@ -11,7 +11,6 @@ To run these tests from the project root, run:
 
     $ python3 -m unittest --verbose tests.test_write
 
-These tests should pass when Task 4 is complete.
 """
 import collections
 import collections.abc
@@ -46,29 +45,6 @@ def build_results(n):
     # Only needed to link together these objects.
     NEODatabase(neos, approaches)
     
-    """
-    g = 0
-    b = 0
-    for a in approaches: 
-        if not math.isnan(a.neo.diameter): 
-            g += 1
-        else: 
-            b += 1
-
-    print(f"good: {g}; bad: {b}")  
-
-    g = 0
-    b = 0
-    for nn in neos: 
-        if not math.isnan(nn.diameter): 
-            g += 1
-        else: 
-            b += 1
-    
-    print(f"good: {g}; bad: {b}")  
-    
-    """
-
     return approaches[:n]
 
 

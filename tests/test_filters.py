@@ -2,7 +2,6 @@ from filters import DesignationFilter, NameFilter, DiameterFilter, HazardousFilt
 from models import NearEarthObject, CloseApproach
 from datetime import datetime, timedelta
 import helpers
-import math
 import operator
 import unittest
 

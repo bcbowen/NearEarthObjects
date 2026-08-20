@@ -1,7 +1,6 @@
 from models import NearEarthObject, CloseApproach
 from datetime import datetime
 import math
-#import pathlib
 import unittest
 
 """
@@ -12,8 +11,6 @@ To run these tests from the project root, run:
 """
 
 class NearEarthObjectTests(unittest.TestCase):
-    # The root of the project, containing `main.py`.
-    #PROJECT_ROOT = pathlib.Path(__file__).parent.parent.resolve() 
 
     def test_ctor_defaults(self): 
         n = NearEarthObject("n1", True)
@@ -40,16 +37,7 @@ class NearEarthObjectTests(unittest.TestCase):
             result = n.fullname
             self.assertEqual(result, expected)
 
-    """
-    result = [f"NEO {self.fullname} "]
-            if self.diameter != float('nan'): 
-                result.append(f"has a diameter of {self.diameter:.3f} km and ")
-    
-            if self.hazardous: 
-                result.append("is potentially hazardous.")
-            else: 
-                result.append("is not potentially hazardous.")
-    """
+
     def test_to_string(self): 
         cases = [
             ('n1', True, 2.1, 'Hendricks', 'NEO n1 (Hendricks) has a diameter of 2.100 km and is potentially hazardous.'),

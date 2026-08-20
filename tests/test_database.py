@@ -8,7 +8,6 @@ To run these tests from the project root, run:
 
     $ python3 -m unittest --verbose tests.test_database
 
-These tests should pass when Task 2 is complete.
 """
 import pathlib
 import math

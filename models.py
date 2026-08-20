@@ -1,5 +1,4 @@
-"""Represent models for near-Earth objects and their close approaches.
-
+"""
 The `NearEarthObject` class represents a near-Earth object. Each has a unique
 primary designation, an optional unique name, an optional diameter, and a flag
 for whether the object is potentially hazardous.
@@ -11,11 +10,6 @@ velocity.
 A `NearEarthObject` maintains a collection of its close approaches, and a
 `CloseApproach` maintains a reference to its NEO.
 
-The functions that construct these objects use information extracted from the
-data files from NASA, so these objects should be able to handle all of the
-quirks of the data set, such as missing names and unknown diameters.
-
-You'll edit this file in Task 1.
 """
 from helpers import cd_to_datetime, datetime_to_str
 from datetime import datetime
@@ -46,7 +40,6 @@ class NearEarthObject:
     @property
     def fullname(self):
         """Return a representation of the full name of this NEO."""
-        # {designation} ({name}) 
         if self.name != None: 
             return f"{self.designation} ({self.name})"
         else: 
@@ -93,32 +86,11 @@ class CloseApproach:
 
     @property
     def time_str(self):
-        """Return a formatted representation of this `CloseApproach`'s approach time.
-
-        The value in `self.time` should be a Python `datetime` object. While a
-        `datetime` object has a string representation, the default representation
-        includes seconds - significant figures that don't exist in our input
-        data set.
-
-        The `datetime_to_str` method converts a `datetime` object to a
-        formatted string that can be used in human-readable representations and
-        in serialization to CSV and JSON files.
-        """
-
         return datetime_to_str(self.time)
 
     def __str__(self):
-        """Return `str(self)`.
-        >>> ca = ...
-        >>> print(ca)
-        At {time_str}, '{neo.fullname}' approaches Earth at a distance of {distance:.2f} au and a velocity of {velocity:.2f} km/s.
-        >>> halley_approach = ...
-        >>> print(halley_approach)
-        On 1910-05-20 12:49, '1P (Halley)' approaches Earth at a distance of 0.15 au and a velocity of 70.56 km/s.
-        """
         return f"At {self.time_str}, '{self.neo.fullname}' approaches Earth at a distance of {self.distance:.2f} au and a velocity of {self.velocity:.2f} km/s."
 
     def __repr__(self):
-        """Return `repr(self)`, a computer-readable string representation of this object."""
         return (f"CloseApproach(time={self.time_str!r}, distance={self.distance:.2f}, "
                 f"velocity={self.velocity:.2f}, neo={self.neo!r})")

@@ -10,7 +10,6 @@ To run these tests from the project root, run::
 
     $ python3 -m unittest --verbose tests.test_query
 
-These tests should pass when Tasks 3a and 3b are complete.
 """
 import datetime
 import pathlib

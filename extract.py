@@ -10,7 +10,6 @@ formatted as described in the project instructions, into a collection of
 The main module calls these functions with the arguments provided at the command
 line, and uses the resulting collections to build an `NEODatabase`.
 
-You'll edit this file in Task 2.
 """
 import csv
 import json
@@ -51,57 +50,6 @@ def load_approaches(cad_json_path: pathlib.Path) -> List[CloseApproach]:
 
     :param neo_csv_path: A path to a JSON file containing data about close approaches.
     :return: A collection of `CloseApproach`es.
-
-    with open('listings.json', 'r') as infile:
-        contents = json.load(infile)  # Parse JSON data into a Python object. (A)
-
-    # Filter out all unavailable job listings.
-    available = [job for job in contents if job["available"]]
-
-    {
-  "count": 4700,
-  "data": [
-    [
-      "2020 AY1",
-      "18",
-      "2458849.537524496",
-      "2020-Jan-01 00:54",
-      "0.0211660525256395",
-      "0.0211628345552616",
-      "0.0211692704882042",
-      "5.62203195551878",
-      "5.59959589405614",
-      "< 00:01",
-      "25.1"
-    ],
-    [
-      "2019 YK",
-      "10",
-      "2458849.587205145",
-      "2020-Jan-01 02:06",
-      "0.0361009669651545",
-      "0.0360768281418277",
-      "0.036125105699654",
-      "7.35926323695148",
-      "7.34922735808709",
-      "< 00:01",
-      "24.0"
-    ],
-
-    
-     "fields": [
-    "des",
-    "orbit_id",
-    "jd",
-    "cd",
-    "dist",
-    "dist_min",
-    "dist_max",
-    "v_rel",
-    "v_inf",
-    "t_sigma_f",
-    "h"
-  ],
     """
     cas = []
     designation_index = 0
