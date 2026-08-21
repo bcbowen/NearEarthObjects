@@ -56,9 +56,10 @@ class NEODatabase:
 
 
 
-        # when approaches are first loaded they only have the designation. Populate the neo object from the collection using the lookup
+        # when approaches are first loaded the neo is None only have the designation. 
+        # Populate the neo object from the collection using the lookup
         for a in self._approaches: 
-            n = self._neo_designation_lookup[a.neo.designation]
+            n = self._neo_designation_lookup[a.designation]
             if n: 
                 a.neo = n
                 n.approaches.append(a)

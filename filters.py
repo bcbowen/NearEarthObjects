@@ -24,8 +24,6 @@ class UnsupportedCriterionError(NotImplementedError):
     """A filter criterion is unsupported."""
 
 
-
-
 class AttributeFilter:
     """A general superclass for filters on comparable attributes.
 
@@ -77,22 +75,22 @@ class AttributeFilter:
 class DesignationFilter(AttributeFilter):
     @classmethod
     def get(cls, approach: CloseApproach):
-        return approach.neo.designation
+        return approach.designation
 
 class NameFilter(AttributeFilter): 
     @classmethod
     def get(cls, approach:CloseApproach): 
-        return approach.neo.name
+        return None if not approach.neo else approach.neo.name
 
 class DiameterFilter(AttributeFilter): 
     @classmethod
     def get(cls, approach:CloseApproach): 
-        return approach.neo.diameter
+        return None if not approach.neo else approach.neo.diameter
 
 class HazardousFilter(AttributeFilter): 
     @classmethod
     def get(cls, approach:CloseApproach): 
-        return approach.neo.hazardous
+        return None if not approach.neo else approach.neo.hazardous
 
 class TimeFilter(AttributeFilter): 
     @classmethod

@@ -13,7 +13,7 @@ class FilterTests(unittest.TestCase):
         name = 'HugeRock'
         diameter = 2.3
         hazardous = True
-        return NearEarthObject(designation, hazardous, name=name, diameter=diameter)
+        return NearEarthObject(designation, hazardous, name = name, diameter = diameter)
 
     def init_close_approach(self) -> CloseApproach: 
         time = datetime(2020, 9, 8, 14, 20)
@@ -21,12 +21,12 @@ class FilterTests(unittest.TestCase):
         distance = 1.2
         velocity = 4.5
         n = self.init_neo()
-        return CloseApproach(utc_date, distance, velocity, n)
+        return CloseApproach(utc_date, distance, velocity, n.designation, n)
 
     def test_designation_filter_match(self): 
         a = self.init_close_approach()
         
-        f = DesignationFilter(operator.eq, a.neo.designation)
+        f = DesignationFilter(operator.eq, a.designation)
         expected = True
         result = f(a) 
         self.assertEqual(expected, result)
@@ -41,6 +41,8 @@ class FilterTests(unittest.TestCase):
 
     def test_name_filter_match(self): 
         a = self.init_close_approach()
+        assert(a.neo != None)
+        assert(a.neo.name != None)
         a.neo.name = 'HugeRock'
         
         f = NameFilter(operator.eq, a.neo.name)
@@ -50,6 +52,8 @@ class FilterTests(unittest.TestCase):
     
     def test_name_filter_mismatch(self): 
         a = self.init_close_approach()
+        assert(a.neo != None)
+        assert(a.neo.name != None)
         a.neo.name = 'HugeRock'
         bad_names = ['TinyRock', '', None]
         
@@ -61,6 +65,8 @@ class FilterTests(unittest.TestCase):
 
     def test_diameter_filter_match(self): 
         a = self.init_close_approach()
+        assert(a.neo != None)
+        assert(a.neo.name != None)
         a.neo.diameter = 2.0
         # cases: op, criteria diameter: all expected to match
         expected = True
@@ -98,6 +104,8 @@ class FilterTests(unittest.TestCase):
     def test_hazardous_filter_match(self): 
 
         a = self.init_close_approach()
+        assert(a.neo != None)
+        assert(a.neo.name != None)
         values = [True, False]
         for value in values:
             a.neo.hazardous = value
@@ -111,6 +119,8 @@ class FilterTests(unittest.TestCase):
     def test_hazardous_filter_mismatch(self): 
         
         a = self.init_close_approach()
+        assert(a.neo != None)
+        assert(a.neo.name != None)
         values = [True, False]
         for value in values:
             a.neo.hazardous = value

@@ -12,7 +12,6 @@ A `NearEarthObject` maintains a collection of its close approaches, and a
 
 """
 from helpers import cd_to_datetime, datetime_to_str
-from datetime import datetime
 import math
 
 class NearEarthObject:
@@ -78,10 +77,11 @@ class CloseApproach:
     private attribute, but the referenced NEO is eventually replaced in the
     `NEODatabase` constructor.
     """
-    def __init__(self, utc_date: str, distance: float, velocity: float, neo: NearEarthObject):
+    def __init__(self, utc_date: str, distance: float, velocity: float, designation: str, neo : NearEarthObject | None = None):
         self.time = cd_to_datetime(utc_date)
         self.distance = distance
         self.velocity = velocity
+        self.designation = designation
         self.neo = neo
 
     @property
@@ -89,7 +89,7 @@ class CloseApproach:
         return datetime_to_str(self.time)
 
     def __str__(self):
-        return f"At {self.time_str}, '{self.neo.fullname}' approaches Earth at a distance of {self.distance:.2f} au and a velocity of {self.velocity:.2f} km/s."
+        return f"At {self.time_str}, '{self.designation}' approaches Earth at a distance of {self.distance:.2f} au and a velocity of {self.velocity:.2f} km/s."
 
     def __repr__(self):
         return (f"CloseApproach(time={self.time_str!r}, distance={self.distance:.2f}, "
